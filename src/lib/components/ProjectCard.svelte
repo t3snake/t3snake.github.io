@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Project } from '#lib/data/projects.ts';
+	import { ProjectCategory, type Project } from '#lib/data/projects.ts';
 
 	let { project }: { project: Project } = $props();
 </script>
@@ -10,6 +10,9 @@
 	</h2>
 
 	<p>{project.short_description}</p>
+		{#if project.category === ProjectCategory.Game && project.can_play_on_web}
+			<a href={project.web_play_link}>Play on {project.web_play_platform_name}</a>
+		{/if}
 </article>
 
 <style>

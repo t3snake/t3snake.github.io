@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ProjectCategory, type Project } from '#lib/data/projects.ts';
+	import { BuildType, ProjectCategory, type Project } from '#lib/data/projects.ts';
 
 	let { project }: { project: Project } = $props();
 </script>
@@ -10,9 +10,19 @@
 	</h2>
 
 	<p>{project.short_description}</p>
-		{#if project.category === ProjectCategory.Game && project.can_play_on_web}
-			<a href={project.web_play_link}>Play on {project.web_play_platform_name}</a>
-		{/if}
+	{#if project.category === ProjectCategory.Game && project.builds.length > 0}
+		<ul>
+			{#each project.builds as build}
+				<li>
+					{#if build.type === BuildType.Web}
+						<a href={build.web_play_link}>Play on {build.platform_name}</a>
+					{:else}
+						<a href={build.download_link}>Download for {build.type} on {build.platform_name}</a>
+					{/if}
+				</li>
+			{/each}
+		</ul>
+	{/if}
 </article>
 
 <style>

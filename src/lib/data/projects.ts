@@ -22,6 +22,7 @@ export interface GameProject extends BaseProject {
 	can_play_on_web: boolean;
 	web_play_platform_name?: string;
 	web_play_link?: string;
+	
 }
 
 export interface WebProject extends BaseProject {

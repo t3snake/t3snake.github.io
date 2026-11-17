@@ -7,6 +7,27 @@ export enum ProjectCategory {
 	Default = "default"
 }
 
+export enum BuildType {
+	Web = "web",
+	Windows = "windows",
+	Linux = "linux",
+	MacOS = "macos"
+}
+
+export interface WebBuild {
+	type: BuildType.Web;
+	platform_name: string;
+	web_play_link: string;
+}
+
+export interface NativeBuild {
+	type: BuildType.Windows | BuildType.Linux | BuildType.MacOS;
+	platform_name: string;
+	download_link: string;
+}
+
+export type ProjectBuild = WebBuild | NativeBuild;
+
 interface BaseProject {
 	id: string;
 	title: string;
@@ -19,10 +40,7 @@ interface BaseProject {
 export interface GameProject extends BaseProject {
 	category: ProjectCategory.Game;
 	game_engine: string;
-	can_play_on_web: boolean;
-	web_play_platform_name?: string;
-	web_play_link?: string;
-	
+	builds: ProjectBuild[];
 }
 
 export interface WebProject extends BaseProject {
@@ -53,9 +71,13 @@ export const projects: Project[] = [
 		primary_language: "GDScript",
 		technologies: ["Godot", "GDScript", "WebGL"],
 		github_url: "https://github.com/t3snake/agent-of-chaos",
-		can_play_on_web: true,
-		web_play_platform_name: "itch.io",
-		web_play_link: "https://t3snake.itch.io/agent-of-chaos",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "itch.io",
+				web_play_link: "https://t3snake.itch.io/agent-of-chaos"
+			}
+		],
 	},
 	{
 		category: ProjectCategory.Game,
@@ -66,9 +88,13 @@ export const projects: Project[] = [
 		primary_language: "GDScript",
 		technologies: ["GDScript", "WebGL"],
 		github_url: "https://github.com/t3snake/fish-hunter",
-		can_play_on_web: true,
-		web_play_platform_name: "itch.io",
-		web_play_link: "https://t3snake.itch.io/fish-hunter",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "itch.io",
+				web_play_link: "https://t3snake.itch.io/fish-hunter"
+			}
+		],
 	},
 	{
 		category: ProjectCategory.Game,
@@ -79,9 +105,13 @@ export const projects: Project[] = [
 		primary_language: "GDScript",
 		technologies: ["Godot", "GDScript", "WebGL"],
 		github_url: "https://github.com/t3snake/strange-places",
-		can_play_on_web: true,
-		web_play_platform_name: "itch.io",
-		web_play_link: "https://t3snake.itch.io/bizarre-critter-world",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "itch.io",
+				web_play_link: "https://t3snake.itch.io/bizarre-critter-world"
+			}
+		],
 	},
 	{
 		category: ProjectCategory.Game,
@@ -92,9 +122,13 @@ export const projects: Project[] = [
 		primary_language: "GDScript",
 		technologies: ["Godot", "GDScript", "WebGL"],
 		github_url: "https://github.com/t3snake/hg-jam-godot",
-		can_play_on_web: true,
-		web_play_platform_name: "itch.io",
-		web_play_link: "https://t3snake.itch.io/untitled-adhd-game",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "itch.io",
+				web_play_link: "https://t3snake.itch.io/untitled-adhd-game"
+			}
+		],
 	},
 	{
 		category: ProjectCategory.Game,
@@ -105,9 +139,13 @@ export const projects: Project[] = [
 		primary_language: "GDScript",
 		technologies: ["Godot", "GDScript", "WebGL"],
 		github_url: "https://github.com/t3snake/risk-it-for-the-biscuit",
-		can_play_on_web: true,
-		web_play_platform_name: "itch.io",
-		web_play_link: "https://t3snake.itch.io/lightspeed-bob",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "itch.io",
+				web_play_link: "https://t3snake.itch.io/lightspeed-bob"
+			}
+		],
 	},
 	{
 		category: ProjectCategory.Game,
@@ -118,9 +156,13 @@ export const projects: Project[] = [
 		primary_language: "GDScript",
 		technologies: ["Godot", "GDScript", "WebGL"],
 		github_url: "https://github.com/t3snake/ultimate-punch-godot",
-		can_play_on_web: true,
-		web_play_platform_name: "itch.io",
-		web_play_link: "https://t3snake.itch.io/ultimate-punch",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "itch.io",
+				web_play_link: "https://t3snake.itch.io/ultimate-punch"
+			}
+		],
 	},
 	{
 		id: "you-are-the-weapon",
@@ -131,9 +173,13 @@ export const projects: Project[] = [
 		technologies: ["Godot", "GDScript", "WebGL"],
 		category: ProjectCategory.Game,
 		github_url: "https://github.com/t3snake/you-are-the-weapon",
-		can_play_on_web: true,
-		web_play_platform_name: "itch.io",
-		web_play_link: "https://t3snake.itch.io/blade-and-blast",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "itch.io",
+				web_play_link: "https://t3snake.itch.io/blade-and-blast"
+			}
+		],
 	},
 	{
 		category: ProjectCategory.Game,
@@ -144,9 +190,13 @@ export const projects: Project[] = [
 		primary_language: "C#",
 		technologies: ["Unity", "C#"],
 		github_url: "https://github.com/t3snake/Practice-Shooter",
-		can_play_on_web: true,
-		web_play_platform_name: "t3snake.dev",
-		web_play_link: "https://t3snake.dev/Unity-Games/Solar_System_Sim",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "t3snake.dev",
+				web_play_link: "https://t3snake.dev/Unity-Games/Solar_System_Sim"
+			}
+		],
 	},
 	{
 		id: "roller-madness",
@@ -156,9 +206,13 @@ export const projects: Project[] = [
 		primary_language: "C#",
 		technologies: ["Unity", "C#"],
 		category: ProjectCategory.Game,
-		can_play_on_web: true,
-		web_play_link: "https://t3snake.dev/Unity-Games/Roller_Madness",
-		web_play_platform_name: "t3snake.dev",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "t3snake.dev",
+				web_play_link: "https://t3snake.dev/Unity-Games/Roller_Madness"
+			}
+		],
 		game_engine: "Unity"
 	},
 	{
@@ -169,9 +223,13 @@ export const projects: Project[] = [
 		primary_language: "C#",
 		technologies: ["Unity", "C#"],
 		category: ProjectCategory.Game,
-		can_play_on_web: true,
-		web_play_link: "https://t3snake.dev/Unity-Games/Solar_System_Sim",
-		web_play_platform_name: "t3snake.dev",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "t3snake.dev",
+				web_play_link: "https://t3snake.dev/Unity-Games/Solar_System_Sim"
+			}
+		],
 		game_engine: "Unity"
 	},
 	{
@@ -182,9 +240,13 @@ export const projects: Project[] = [
 		primary_language: "C#",
 		technologies: ["Unity", "C#"],
 		category: ProjectCategory.Game,
-		can_play_on_web: true,
-		web_play_link: "https://t3snake.dev/Unity-Games/Super_Sparty_Brothers++",
-		web_play_platform_name: "t3snake.dev",
+		builds: [
+			{
+				type: BuildType.Web,
+				platform_name: "t3snake.dev",
+				web_play_link: "https://t3snake.dev/Unity-Games/Super_Sparty_Brothers++"
+			}
+		],
 		game_engine: "Unity"
 	},
 	{
@@ -195,7 +257,7 @@ export const projects: Project[] = [
 		primary_language: "Python",
 		technologies: ["Python", "Pygame"],
 		category: ProjectCategory.Game,
-		can_play_on_web: false,
+		builds: [],
 		game_engine: "Pygame"
 	},
 	{
@@ -206,7 +268,7 @@ export const projects: Project[] = [
 		primary_language: "C++",
 		technologies: ["Unreal Engine 5", "C++"],
 		category: ProjectCategory.Game,
-		can_play_on_web: false,
+		builds: [],
 		game_engine: "Unreal Engine"
 	},
 
